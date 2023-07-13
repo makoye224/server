@@ -124,6 +124,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
     const token = jwt.sign(payload, secret, { expiresIn: '60m' });
     
     const link = `https://sokoni-server.onrender.com/api/users/forgot-password/${userExists._id}/${token}`;
+    res.json({
+        link: link
+    })
     
     // send email with reset link
     /*
