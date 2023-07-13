@@ -19,7 +19,6 @@ let transporter = nodemailer.createTransport({
 //@route POST/api/users
 //@access Public 
 const registerUser = asyncHandler(async(req, res) => {
-    console.log(`registering`)
     const {name, email, password} = req.body
     if(!name || !email || !password){
         res.status(400)
