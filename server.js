@@ -14,7 +14,13 @@ const { Server } = require("socket.io");
 connectDB();
 
 // Middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: "https://sokoni-market-makoye224-gmailcom.vercel.app",
+  methods: ["GET", "POST"],
+  allowedHeaders: "*",
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
