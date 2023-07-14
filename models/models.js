@@ -16,8 +16,7 @@ const productSchema = new mongoose.Schema({
   unit_price: { type: mongoose.Schema.Types.Decimal128, required: true },
   inventory: { type: Number, required: true },
   last_update: { type: Date, default: Date.now },
-  collections: { type: mongoose.Schema.Types.ObjectId, ref: 'Collection', required: true },
-  promotions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Promotion' }],
+  collections: { type: String, required: true },
   seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller', required: true },
   imageUrls: [{ type: String }] 
 });
