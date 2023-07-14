@@ -16,7 +16,7 @@ connectDB();
 // Middleware
 // Middleware
 app.use(cors({
-  origin: "https://sokoni-market-makoye224-gmailcom.vercel.app",
+  origin: "*",
   methods: ["GET", "POST"],
   allowedHeaders: "*",
 }));
