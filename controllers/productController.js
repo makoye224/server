@@ -52,7 +52,6 @@ const setProducts = asyncHandler(async (req, res) => {
       !req.body.description ||
       !req.body.unit_price ||
       !req.body.inventory ||
-      !req.body.collections ||
       !req.body.seller ||
       !req.files || !req.files.images // Assuming the uploaded files are in the 'images' field
     ) {
