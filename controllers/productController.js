@@ -47,7 +47,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
 //@route POST/api/products
 //@access Private
 const setProducts = asyncHandler(async (req, res) => {
-  console.log(req.body)
+  console.log(req.file)
     if (
       !req.body.title ||
       !req.body.description ||
