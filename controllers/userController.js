@@ -1,19 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const asyncHandler = require("express-async-handler")
-const User = require("../models/userModel")
-const nodemailer = require('nodemailer')
-
-// create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.PORT,
-    secure: false, // true for 465, false for other ports
-    auth: {
-        user: process.env.EMAIL_ADDRESS,
-        pass: process.env.EMAIL_PASSWORD,
-    },
-  });
+const {Customer, Seller} = require("../models/models")
 
 // @desc Register new user
 //@route POST/api/users
@@ -80,11 +68,6 @@ const loginUser = asyncHandler(async(req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            businessName: user.businessName,
-            businessType: user.businessType,
-            userType: user.userType,
-            mainProduct: user.mainProduct,
-            businessRegistration: user.businessRegistration,
             token: generateToken(user._id)
         })
     }
@@ -128,23 +111,6 @@ const forgotPassword = asyncHandler(async (req, res) => {
         link: link
     })
     
-    // send email with reset link
-    /*
-    const mailOptions = {
-        from: process.env.EMAIL_ADDRESS, // sender address
-        to: userExists.email, // list of receivers
-        subject: 'Reset your password', // Subject line
-        html: `<p>Hi ${userExists.name},</p><p>You have requested to reset your password. Please click the link below to reset your password:</p><a href="${link}">${link}</a><p>This link will expire in 1 hour.</p>`, // html body
-      };
-  
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-          throw new Error('Failed to send email');
-        }
-        console.log('Message sent: %s', info.messageId);
-        res.status(200).json(userExists);
-      }); */
     console.log(link)
     res.status(200).json(userExists)
     } catch(error){
