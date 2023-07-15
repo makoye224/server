@@ -13,10 +13,10 @@ const collectionSchema = new mongoose.Schema({
 const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  unit_price: { type: mongoose.Schema.Types.Decimal128, required: true },
+  unit_price: { type: Number, required: true },
   inventory: { type: Number, required: true },
   last_update: { type: Date, default: Date.now },
-  collections: { type: mongoose.Schema.Types.ObjectId, ref: 'Collection', required: true },
+  collections: { type: String, required: true },
   promotions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Promotion' }],
   seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller', required: true },
   imageUrls: [{ type: String }] 
