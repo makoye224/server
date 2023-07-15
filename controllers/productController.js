@@ -30,7 +30,7 @@ const createProduct = async (req, res) => {
     }
 
     const { unit_price, inventory, description, seller, title, collections } = req.body;
-   console.log(seller)
+   console.log(seller._id)
     try {
       const uniqueFileNames = [];
       // Upload images to the S3 bucket
@@ -55,7 +55,7 @@ const createProduct = async (req, res) => {
         unit_price,
         inventory,
         description,
-        seller: seller,
+        seller: seller._id,
         collections,
         imageUrls,
       });
