@@ -14,7 +14,13 @@ const { Server } = require("socket.io");
 connectDB();
 
 // Middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: "*",
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

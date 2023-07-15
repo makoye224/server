@@ -17,7 +17,6 @@ const productSchema = new mongoose.Schema({
   inventory: { type: Number, required: true },
   last_update: { type: Date, default: Date.now },
   collections: { type: String, required: true },
-  promotions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Promotion' }],
   seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller', required: true },
   imageUrls: [{ type: String }] 
 });

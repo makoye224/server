@@ -24,9 +24,29 @@ const s3Upload = (bucketName) => {
 const createProduct = async (req, res) => {
   const uploadMultiple = s3Upload(bucketName);
 
-  uploadMultiple(req, res, async (err) => {
-    if (err) {
-      return res.status(400).json({ success: false, message: err.message });
+// @desc Get all products
+//@route GET/api/products/all
+//@access Private
+const getAllProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({});
+  res.status(200).json(products);
+});
+
+// @desc Set product
+//@route POST/api/products
+//@access Private
+const setProducts = asyncHandler(async (req, res) => {
+  console.log(req.file)
+    if (
+      !req.body.title ||
+      !req.body.description ||
+      !req.body.unit_price ||
+      !req.body.inventory ||
+      !req.body.seller ||
+      !req.files || !req.files.images // Assuming the uploaded files are in the 'images' field
+    ) {
+      res.status(400);
+      throw new Error("Please add all fields and provide images");
     }
 
     const { unit_price, inventory, description, seller, title, collections } = req.body;
