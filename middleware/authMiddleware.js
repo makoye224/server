@@ -9,27 +9,17 @@ const protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      // get token from header
+      // Get token from header
       token = req.headers.authorization.split(" ")[1];
-      // verify token
+      // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // check if the token belongs to a customer
-      const customer = await Customer.findById(decoded.id).select("-password");
-      if (customer) {
-        req.customer = customer;
-        next();
-      }
-
-      // check if the token belongs to a seller
+      // Check if the token belongs to a seller
       const seller = await Seller.findById(decoded.id).select("-password");
       if (seller) {
         req.seller = seller;
         next();
-      }
-
-      // if neither customer nor seller is found, throw an error
-      if (!customer && !seller) {
+      } else {
         res.status(401);
         throw new Error("Not Authorized");
       }

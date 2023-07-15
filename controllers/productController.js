@@ -70,19 +70,29 @@ const createProduct = async (req, res) => {
 };
 
 
-//get all products
 const getProducts = async (req, res) => {
-    try {
-        const products = await Product.find({}).sort({ createdAt: -1 })
-        res.status(200).json(products)
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
+  try {
+    const sellerId = req.seller._id; // Access the authenticated seller's ID from the req object
+    const products = await Product.find({ seller: sellerId }).sort({ createdAt: -1 });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+//get all products
+const getSellerProducts = async (req, res) => {
+  try {
+      const products = await Product.find({}).sort({ createdAt: -1 })
+      res.status(200).json(products)
+  } catch (error) {
+      res.status(500).json({ error: error.message })
+  }
 }
 
 //get a single product 
 const getProduct = async (req, res) => {
-  console.log('.....')
     const { id } = req.params
     try {
         const product = await Product.findById(id)
